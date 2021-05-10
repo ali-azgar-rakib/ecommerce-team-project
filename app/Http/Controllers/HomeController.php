@@ -30,10 +30,10 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout();
-        $data = [
+        $data = array(
             'message'    => 'Logout Successfully !',
             'alert-type' => 'success'
-        ];
+        );
         return redirect()->route('login')->with($data);
     }
 }

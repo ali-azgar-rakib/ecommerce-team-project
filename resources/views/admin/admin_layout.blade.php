@@ -36,6 +36,7 @@
   <link href="{{ asset('backend') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
   <link href="{{ asset('backend') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
   <link href="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
@@ -406,20 +407,20 @@
   <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
 
   <script>
-    @if(Session::has('messege'))
+    @if(Session::has('message'))
                 var type="{{Session::get('alert-type','info')}}"
                 switch(type){
                     case 'info':
-                         toastr.info("{{ Session::get('messege') }}");
+                         toastr.info("{{ Session::get('message') }}");
                          break;
                     case 'success':
-                        toastr.success("{{ Session::get('messege') }}");
+                        toastr.success("{{ Session::get('message') }}");
                         break;
                     case 'warning':
-                       toastr.warning("{{ Session::get('messege') }}");
+                       toastr.warning("{{ Session::get('message') }}");
                         break;
                     case 'error':
-                        toastr.error("{{ Session::get('messege') }}");
+                        toastr.error("{{ Session::get('message') }}");
                         break;
                 }
               @endif

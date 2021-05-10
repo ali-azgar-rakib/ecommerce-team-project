@@ -29,7 +29,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>Starlight Responsive Bootstrap 4 Admin Template</title>
+    <title>Ecommerce</title>
 
     <!-- vendor css -->
     <link href="{{ asset('backend') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -411,20 +411,20 @@
 
 
     <script>
-        @if(Session::has('messege'))
+        @if(Session::has('message'))
           var type="{{Session::get('alert-type','info')}}"
           switch(type){
               case 'info':
-                   toastr.info("{{ Session::get('messege') }}");
+                   toastr.info("{{ Session::get('message') }}");
                    break;
               case 'success':
-                  toastr.success("{{ Session::get('messege') }}");
+                  toastr.success("{{ Session::get('message') }}");
                   break;
               case 'warning':
-                 toastr.warning("{{ Session::get('messege') }}");
+                 toastr.warning("{{ Session::get('message') }}");
                   break;
               case 'error':
-                  toastr.error("{{ Session::get('messege') }}");
+                  toastr.error("{{ Session::get('message') }}");
                   break;
           }
         @endif
