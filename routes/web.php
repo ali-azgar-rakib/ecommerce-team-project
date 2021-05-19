@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'frontend.index');
 
 Auth::routes();
 
@@ -28,3 +27,8 @@ Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'in
 Route::get('/admin', [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [App\Http\Controllers\Admin\LoginController::class, 'login']);
 Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, 'logout'])->name('admin.logout');
+
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+    Route::resource('category', CategoryController::class);
+});
