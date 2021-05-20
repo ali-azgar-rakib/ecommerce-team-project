@@ -28,4 +28,22 @@ class CategoryController extends Controller
 
         return back()->with($data);
     }
+
+    public function edit ($id) 
+    {
+        $category = Category::findOrFail($id);
+        return $category;
+    } 
+
+    public function udpated (Request $request) 
+    {
+        // Category::findOrFail($request->id)->update([
+        //     'category_name' => $request->category_name
+        // ]);
+        $category = Category::findOrFail($request->id);
+        $category->category_name = $request->category_name;
+        if($category->save()) {
+            return back()->with('message',"jkdfjdsf");
+        }
+    } 
 }

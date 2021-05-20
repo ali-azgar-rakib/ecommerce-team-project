@@ -30,5 +30,6 @@ Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, '
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+    Route::post('category/updated',[CategoryController::class,'udpated']);
     Route::resource('category', CategoryController::class);
 });
