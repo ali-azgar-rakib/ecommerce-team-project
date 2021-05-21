@@ -35,9 +35,10 @@
                             <td>{{ $category->category_name }}</td>
                             <td>
                             <button class="btn btn-warning btn-sm " id="edit" data-id="{{ $category->id }}">edit</button>
+                            <button class="btn btn-warning btn-sm  " id="delete" data-id="{{ $category->id }}">delete</button>
                         
                                 <!-- <button class="btn btn-sm btn-warning">edit</button> -->
-                                <button class="btn btn-sm btn-danger" id='delete'>delete</button>
+                                <!-- <button class="btn btn-sm btn-danger" id='delete'>delete</button> -->
                             </td>
 
                         </tr>
@@ -108,6 +109,7 @@
             </div>
             <form method="post" action="{{ url('/admin/category/updated') }}">
                 @csrf
+               
                 <input type="hidden" id="dataid" name="id" value="">
                 <div class="modal-body pd-20">
                     <div class="form-group">
@@ -123,7 +125,7 @@
 
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info pd-x-20">Add Category</button>
+                    <button type="submit" class="btn btn-info pd-x-20">Update</button>
                     <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -131,6 +133,7 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 {{-- end modal here  --}}
+
 
 @endsection
 @section('script')
@@ -150,4 +153,5 @@ $("body").on('click',"#edit",function() {
 
 }) 
         </script>
+
 @endsection
