@@ -9,52 +9,54 @@
         <a class="breadcrumb-item" href="index.html">Starlight</a>
         <a class="breadcrumb-item" href="index.html">Tables</a>
         <span class="breadcrumb-item active">Data Table</span>
-        </nav>
-        <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Category List
-                <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
-                    data-target="#modaldemo3">Add New</a>
-            </h6>
-            {{$categories}}
-            <div class="table-wrapper">
-                <table id="datatable1" class="table display responsive nowrap text-center">
-                    <thead>
-                        <tr>
-                            <th class="wd-15p">Serial</th>
-                            <th class="wd-15p">Category Name</th>
-                            <th class="wd-20p">Action</th>
+    </nav>
+    <div class="card pd-20 pd-sm-40">
+        <h6 class="card-body-title">Category List
+            <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
+                data-target="#modaldemo3">Add New</a>
+        </h6>
+        {{$categories}}
+        <div class="table-wrapper">
+            <table id="datatable1" class="table display responsive nowrap text-center">
+                <thead>
+                    <tr>
+                        <th class="wd-15p">Serial</th>
+                        <th class="wd-15p">Category Name</th>
+                        <th class="wd-20p">Action</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($categories as $key=>$category)
-
-
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td>
-                            <button class="btn btn-warning btn-sm " id="edit" data-id="{{ $category->id }}">edit</button>
-                            <button class="btn btn-warning btn-sm  " id="delete" data-id="{{ $category->id }}">delete</button>
-                        
-                                <!-- <button class="btn btn-sm btn-warning">edit</button> -->
-                                <!-- <button class="btn btn-sm btn-danger" id='delete'>delete</button> -->
-                            </td>
-
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div><!-- table-wrapper -->
-        </div><!-- card -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($categories as $key=>$category)
 
 
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $category->category_name }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm " id="edit"
+                                data-id="{{ $category->id }}">edit</button>
+                            <button class="btn btn-warning btn-sm  " id="delete"
+                                data-id="{{ $category->id }}">delete</button>
 
+                            <!-- <button class="btn btn-sm btn-warning">edit</button> -->
+                            <!-- <button class="btn btn-sm btn-danger" id='delete'>delete</button> -->
+                        </td>
 
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+    </div><!-- card -->
 
 
 
-    </div><!-- sl-pagebody -->
+
+
+
+
+</div><!-- sl-pagebody -->
 
 </div><!-- sl-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
@@ -109,7 +111,7 @@
             </div>
             <form method="post" action="{{ url('/admin/category/updated') }}">
                 @csrf
-               
+
                 <input type="hidden" id="dataid" name="id" value="">
                 <div class="modal-body pd-20">
                     <div class="form-group">
@@ -139,7 +141,7 @@
 @section('script')
 
 <script>
-         $(document).ready(function() {
+    $(document).ready(function() {
 
 $("body").on('click',"#edit",function() {
     let id = $(this).data('id')
@@ -152,6 +154,6 @@ $("body").on('click',"#edit",function() {
 })
 
 }) 
-        </script>
+</script>
 
 @endsection
