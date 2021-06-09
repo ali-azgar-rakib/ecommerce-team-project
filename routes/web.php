@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Brands\BrandsController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 
-// admin route 
+// admin route
 Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
 Route::get('/admin', [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [App\Http\Controllers\Admin\LoginController::class, 'login']);
@@ -31,5 +32,8 @@ Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, '
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
     Route::post('category/updated', [CategoryController::class, 'udpated']);
-    Route::resource('category', CategoryController::class);
+    Route::resources([
+        'category' => CategoryController::class,
+        'brands' => BrandsController::class
+    ]);
 });
