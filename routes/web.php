@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Brands\BrandsController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
+use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,5 +38,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
         'category' => CategoryController::class,
         'brands' => BrandsController::class,
         'sub-category' => SubCategoryController::class,
+        'coupon' => CouponController::class,
     ]);
 });

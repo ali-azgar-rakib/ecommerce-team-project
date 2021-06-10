@@ -11,7 +11,7 @@
         <span class="breadcrumb-item active">Data Table</span>
     </nav>
     <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">Category List
+        <h6 class="card-body-title">Brands List
             <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
                 data-target="#modaldemo3">Add New</a>
         </h6>
@@ -20,23 +20,30 @@
                 <thead>
                     <tr>
                         <th class="wd-15p">Serial</th>
-                        <th class="wd-15p">Category Name</th>
+                        <th class="wd-15p">Coupon</th>
+                        <th class="wd-15p">Discount</th>
                         <th class="wd-20p">Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $key=>$category)
+                    @foreach ($coupons as $key=>$coupon)
 
 
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $category->category_name }}</td>
+                        <td>{{ $coupon->coupon }}</td>
+                        <td>{{ $coupon->discount }}</td>
+
                         <td>
-                            <button class="btn btn-warning btn-sm " id="edit"
-                                data-id="{{ $category->id }}">edit</button>
-                            <button class="btn btn-warning btn-sm  " id="delete"
-                                data-id="{{ $category->id }}">delete</button>
+                            <button class="btn btn-warning btn-sm " id="edit" data-id="{{ $coupon->id }}">edit</button>
+
+                            <form method="post" action="{{ route('admin.coupon.destroy',$coupon->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-warning btn-sm">delete</button>
+                            </form>
+
 
                             <!-- <button class="btn btn-sm btn-warning">edit</button> -->
                             <!-- <button class="btn btn-sm btn-danger" id='delete'>delete</button> -->
@@ -73,23 +80,36 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('admin.category.store') }}">
+            @csrf
+            <form method="post" action="{{ route('admin.coupon.store') }}">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name') is-invalid @enderror">
-                        @error('category_name')
+                        <label for="exampleInputEmail1">Coupon</label>
+                        <input name="coupon" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter Sub Category Name"
+                            class="@error('coupon') is-invalid @enderror">
+                        @error('coupon')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- discount  --}}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Coupon Discount (%)</label>
+                        <input name="discount" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter Sub Category Name"
+                            class="@error('discount') is-invalid @enderror">
+                        @error('discount')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
 
+
+
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info pd-x-20">Add Category</button>
+                    <button type="submit" class="btn btn-info pd-x-20">Submit</button>
                     <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -108,17 +128,27 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ url('/admin/category/updated') }}">
+            <form method="post" action="{{ url('/admin/brand/updated') }}">
                 @csrf
 
                 <input type="hidden" id="dataid" name="id" value="">
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="category_name"
-                            aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name') is-invalid @enderror">
-                        @error('category_name')
+                        <label for="exampleInputEmail1">Coupon</label>
+                        <input name="coupon" type="text" class="form-control" id="coupon" aria-describedby="emailHelp"
+                            placeholder="Enter Coupon Name" class="@error('coupon') is-invalid @enderror">
+                        @error('coupon')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Discount</label>
+                        <input name="discount" type="text" class="form-control" id="discount"
+                            aria-describedby="emailHelp" placeholder="Enter Coupon Name"
+                            class="@error('discount') is-invalid @enderror">
+                        @error('discount')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -144,13 +174,16 @@
 
 $("body").on('click',"#edit",function() {
     let id = $(this).data('id')
-    $.get(`/admin/category/${id}/edit`,function(data) {
+    $.get(`/admin/coupon/${id}/edit`,function(data) {
         $("#dataid").val(id)
-        $("#category_name").val(data.category_name)
+        $("#coupon").val(data.coupon)
+        $("#discount").val(data.discount)
         $("#modaldemo4").modal('show')
     })
 
 })
+
+
 
 })
 </script>
