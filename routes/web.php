@@ -4,7 +4,11 @@ use App\Http\Controllers\Admin\Brands\BrandsController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
+use App\Http\Controllers\Admin\NewsLatter\NewsLatterController;
+use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\HomeController;
+use App\Models\Admin\SubCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +38,20 @@ Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, '
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
     Route::post('category/updated', [CategoryController::class, 'udpated']);
+    Route::get('subscriber', [NewsLatterController::class, 'index'])->name('subscriber.index');
+    Route::get('/get/subcategory/{id}', [SubCategoryController::class, 'getSubCategoryByCategoryId']);
+    Route::get('/change/product/status/{product}', [ProductController::class, 'changeStatus'])->name('product.status.change');
     Route::resources([
         'category' => CategoryController::class,
         'brands' => BrandsController::class,
         'sub-category' => SubCategoryController::class,
         'coupon' => CouponController::class,
+        'product' => ProductController::class,
     ]);
 });
+
+
+
+// frontend
+
+Route::post('/newslater', [FrontendController::class, 'newsletter'])->name('newslater');

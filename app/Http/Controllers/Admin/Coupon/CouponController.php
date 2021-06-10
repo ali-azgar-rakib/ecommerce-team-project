@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Coupon;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Util\CustomMessage;
 
 class CouponController extends Controller
 {
@@ -43,7 +44,7 @@ class CouponController extends Controller
             'discount' => 'required|integer|max:99'
         ]);
         Coupon::create($request->only('coupon', 'discount'));
-        $notificatons = $this->notification('Coupon Added', 'success');
+        $notificatons = CustomMessage::customMessage('Coupon Added', 'success');
 
         return back()->with($notificatons);
     }
@@ -91,15 +92,7 @@ class CouponController extends Controller
     public function destroy(Coupon $coupon)
     {
         $coupon->delete();
-        $notificatons = $this->notification('Coupon Deleted', 'success');
+        $notificatons = CustomMessage::customMessage('Coupon Deleted', 'success');
         return back()->with($notificatons);
-    }
-
-    private function notification($message, $status)
-    {
-        return [
-            'message' => $message . ' Successfully',
-            'status' => $status
-        ];
     }
 }
