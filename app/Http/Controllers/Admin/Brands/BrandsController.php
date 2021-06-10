@@ -6,6 +6,7 @@ use App\Models\Admin\Brand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BrandsController extends Controller
 {
@@ -106,8 +107,16 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        if ($brand->brand_photo) {
+            unlink('img/media/brands/' . $brand->brand_photo);
+        }
+        $brand->delete();
+        $notification = [
+            'message' => 'Delete Successfully',
+            'status' => 'success'
+        ];
+        return back()->with($notification);
     }
 }

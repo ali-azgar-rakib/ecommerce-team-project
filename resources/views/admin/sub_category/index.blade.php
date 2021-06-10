@@ -27,19 +27,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($brands as $key=>$brand)
+                    @foreach ($sub_categories as $key=>$sub_category)
 
 
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $brand->brand_name }}</td>
-                        <td><img width="50" src="{{ asset('img/media/brands/'.$brand->brand_photo) }}"
-                                alt="{{ $brand->brand_photo }}">
-                        </td>
-                        <td>
-                            <button class="btn btn-warning btn-sm " id="edit" data-id="{{ $brand->id }}">edit</button>
+                        <td>{{ $sub_category->sub_category_name }}</td>
+                        <td>{{ $sub_category->category->category_name }}</td>
 
-                            <form method="post" action="{{ route('admin.brands.destroy',$brand->id) }}">
+                        <td>
+                            <button class="btn btn-warning btn-sm " id="edit"
+                                data-id="{{ $sub_category->id }}">edit</button>
+
+                            <form method="post" action="{{ route('admin.sub-category.destroy',$sub_category->id) }}">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-warning btn-sm">delete</button>
@@ -81,25 +81,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('admin.brands.store') }}" enctype="multipart/form-data">
+            @csrf
+            <form method="post" action="{{ route('admin.sub-category.store') }}">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Brand Name</label>
-                        <input name="brand_name" type="text" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Enter Brand Name"
-                            class="@error('brand_name') is-invalid @enderror">
-                        @error('brand_name')
+                        <label for="exampleInputEmail1">Sub Category Name</label>
+                        <input name="sub_category_name" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter Sub Category Name"
+                            class="@error('sub_category_name') is-invalid @enderror">
+                        @error('sub_category_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     {{-- photo  --}}
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Brand Photo</label>
-                        <input name="brand_photo" type="file" class="form-control" id="exampleInputEmail1"
-                            class="@error('brand_photo') is-invalid @enderror">
-                        @error('brand_photo')
+                        <label>Select Category</label>
+                        <select name="category_id" class="form-control"
+                            class="@error('category_id') is-invalid @enderror">
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -107,7 +112,7 @@
 
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info pd-x-20">Add Category</button>
+                    <button type="submit" class="btn btn-info pd-x-20">Add Sub Category</button>
                     <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
             </form>

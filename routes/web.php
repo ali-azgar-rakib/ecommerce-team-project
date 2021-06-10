@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Brands\BrandsController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
     Route::post('category/updated', [CategoryController::class, 'udpated']);
     Route::resources([
         'category' => CategoryController::class,
-        'brands' => BrandsController::class
+        'brands' => BrandsController::class,
+        'sub-category' => SubCategoryController::class,
     ]);
 });
