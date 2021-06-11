@@ -1,78 +1,67 @@
-@extends('layouts.app')
-@section('userMain')
+@extends('layouts.frontend_layout')
+@section('frontendContent')
 
 
-<form method="POST" action="{{ route('register') }}">
-    @csrf
-    <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
-
-        <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
-            <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span
-                    class="tx-info tx-normal">admin</span></div>
-            <div class="tx-center mg-b-60">User Registration</div>
-
-            <div class="form-group">
-
-                <div class="form-group row">
-
-                    <div class="col-12">
-                        <input placeholder="Name" id="name" type="text"
-                            class="form-control @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-
-                    <div class="col-12">
-                        <input placeholder="Email" id="email" type="email"
-                            class="form-control @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email">
-
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-
-                    <div class="col-12">
-                        <input placeholder="Password" id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="new-password">
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-12">
-                        <input placeholder="Confirm Password" id="password-confirm" type="password" class="form-control"
-                            name="password_confirmation" required autocomplete="new-password">
-                    </div>
-                </div>
+@push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/contact_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/contact_responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/custom_login.css') }}">
 
 
-            </div><!-- form-group -->
-            <button type="submit" class="btn btn-info btn-block">Sign Up</button>
+@endpush
 
-            <div class="mg-t-60 tx-center">already registered ? <a href="{{ route('login') }}" class="tx-info">Sign
-                    In</a></div>
-        </div><!-- login-wrapper -->
-    </div><!-- d-flex -->
-</form>
+@include('frontend.MainNav')
+
+
+
+<!-- Contact Form -->
+
+
+<div class="container login-container">
+    <div id="logreg-forms">
+        <form class="form-signin" action="{{ route('register') }}" method='post'>
+            @csrf
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign
+                        in
+                        with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign
+                        in
+                        with Google+</span> </button>
+            </div>
+            <p style="text-align:center"> OR </p>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <input name="name" type="text" id="inputEmail" class="form-control" placeholder="Email address" required=""
+                autofocus="">
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                required="" autofocus="">
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
+                required="">
+            <input name="password_confirmation" type="password" id="inputPassword" class="form-control"
+                placeholder="Password" required="">
+
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+            <a href="{{ route('password.request') }}" id="forgot_pswd">Forgot password?</a>
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <a href="{{ route('login') }}" class="btn btn-primary btn-block text-light"><i class="fas fa-user-plus"></i>
+                Already have a account ? login </a>
+        </form>
+
+
+
+    </div>
+</div>
+
+
 
 @endsection

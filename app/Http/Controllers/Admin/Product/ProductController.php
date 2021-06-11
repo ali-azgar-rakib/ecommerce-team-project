@@ -84,7 +84,8 @@ class ProductController extends Controller
             'mid_slider',
             'hot_new',
             'trend',
-            'status'
+            'status',
+            'bogo'
         ) + ['status' => 1, 'image_one' => $image_one_name, 'image_two' => $image_two_name, 'image_three' => $image_three_name]);
         $notification = CustomMessage::customMessage('Product Added', 'success');
         return redirect()->route('admin.product.index')->with($notification);
@@ -96,9 +97,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        $product = $product->with(['category', 'sub_category', 'brand'])->first();
+        $product = Product::where('id', $id)->with(['category', 'sub_category', 'brand'])->first();
         return view('admin.product.show', compact('product'));
     }
 
@@ -108,11 +109,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $product = $product->with(['category', 'sub_category', 'brand'])->first();
+        $product = Product::where('id', $id)->with(['category', 'sub_category', 'brand'])->first();
         return view('admin.product.edit', compact('categories', 'brands', 'product'));
     }
 
@@ -175,7 +176,8 @@ class ProductController extends Controller
             'mid_slider',
             'hot_new',
             'trend',
-            'status'
+            'status',
+            'bogo'
         ) + ['status' => 1, 'image_one' => $image_one_name, 'image_two' => $image_two_name, 'image_three' => $image_three_name]);
         $notification = CustomMessage::customMessage('Updated ', 'success');
         return redirect()->route('admin.product.index')->with($notification);

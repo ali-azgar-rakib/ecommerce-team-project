@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\NewsLatter\NewsLatterController;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\WishlistController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Models\Admin\SubCategory;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'frontend.index');
+Route::get('/', [FrontendController::class, 'index']);
 
 Auth::routes();
 
@@ -55,3 +56,4 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
 // frontend
 
 Route::post('/newslater', [FrontendController::class, 'newsletter'])->name('newslater');
+Route::get('/add/wishlist/{id}', [WishlistController::class, 'add_wishlist']);

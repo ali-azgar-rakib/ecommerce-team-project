@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    @stack('css')
 
 </head>
 
@@ -30,7 +31,6 @@
 
         <header class="header">
 
-            <!-- Top Bar -->
 
             <div class="top_bar">
                 <div class="container">
@@ -55,21 +55,33 @@
                                                 <li><a href="#">Japanese</a></li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">EUR Euro</a></li>
-                                                <li><a href="#">GBP British Pound</a></li>
-                                                <li><a href="#">JPY Japanese Yen</a></li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div class="top_bar_user">
+
+                                    @guest
                                     <div class="user_icon"><img src="{{ asset('frontend') }}/images/user.svg" alt="">
                                     </div>
-                                    <div><a href="#">Register</a></div>
-                                    <div><a href="#">Sign in</a></div>
+                                    <div><a href="{{ route('register') }}">Register</a></div>
+                                    <div><a href="{{ route('login') }}">Sign in</a></div>
+                                    @else
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a href="{{ url('home') }}">
+                                                <div class="user_icon"><img
+                                                        src="{{ asset('frontend') }}/images/user.svg" alt=""></div>
+                                                profile<i class="fas fa-chevron-down"></i>
+                                            </a>
+                                            <ul>
+                                                <li><a href="#">wishlist</a></li>
+                                                <li><a href="#">checkout</a></li>
+                                                <li><a href="{{ route('user.logout') }}">logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    @endguest
+
                                 </div>
                             </div>
                         </div>
@@ -285,9 +297,10 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
     </script>
+    @yield('script')
 </body>
 
 <script>

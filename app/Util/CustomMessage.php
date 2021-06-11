@@ -9,7 +9,7 @@ class CustomMessage
     public static function customMessage($message, $status)
     {
         return [
-            'message' => $message . ' Successfully',
+            'message' => $message,
             'status' => $status
         ];
     }

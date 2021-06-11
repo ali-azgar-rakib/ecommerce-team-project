@@ -284,6 +284,15 @@
                                     </label>
                                 </div>
                             </div><!-- col-4 -->
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="ckbox">
+                                        <input type="checkbox" value="1" name="bogo"
+                                            {{ $product->bogo == 1 ? 'checked':'' }}>
+                                        <span>BOGO</span>
+                                    </label>
+                                </div>
+                            </div><!-- col-4 -->
 
                         </div>
 

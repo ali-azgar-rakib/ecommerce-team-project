@@ -24,6 +24,8 @@
                     <div class="form-group pull-right">
 
                         <a href="{{ route('admin.product.create') }}" class="btn btn-sm btn-success ">Add Product</a>
+                        <a href="{{ route('admin.product.edit',$product->id) }}"
+                            class="btn btn-sm btn-primary ">edit</a>
                         <a href="{{ route('admin.product.index') }}" class="btn btn-sm btn-danger ">All
                             Product</a>
                     </div>
@@ -56,7 +58,7 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Category <span class="tx-danger">*</span></label>
-                                <strong>{{ $product->category->category_name }}</strong>
+                                <strong>{{ $product->category->category_name ?? 'Not Available' }}</strong>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
@@ -227,6 +229,20 @@
 
                                     @endif
                                     <span>Trend</span>
+                                </label>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>
+                                    @if ($product->bogo == 1)
+                                    <span class="badge badge-success badge-pill">active</span>
+
+                                    @else
+                                    <span class="badge badge-danger badge-pill">inactive</span>
+
+                                    @endif
+                                    <span>BOGO</span>
                                 </label>
                             </div>
                         </div><!-- col-4 -->

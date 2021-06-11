@@ -36,8 +36,8 @@
                     <tr>
                         <td>{{ $product->product_code }}</td>
                         <td>{{ $product->product_name }}</td>
-                        <td>{{ $product->category->category_name }}</td>
-                        <td>{{ $product->brand->brand_name }}</td>
+                        <td>{{ $product->category->category_name ?? 'Not Available' }}</td>
+                        <td>{{ $product->brand->brand_name ?? 'Not Available' }}</td>
                         <td><img width="50" src="{{ asset('img/media/products/'.$product->image_one) }}"
                                 alt="{{ $product->brand_photo }}">
                         </td>
