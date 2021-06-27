@@ -16,10 +16,12 @@
                         </div>
 
                         <ul class="cat_menu">
+
                             @foreach ($categories as $category)
 
+
                             <li class="hassubs">
-                                <a href="#">{{ $category->category_name }}<i class="fas fa-chevron-right"></i></a>
+                                <a href="#">{{ $category->category_name  }}<i class="fas fa-chevron-right"></i></a>
                                 <ul>
                                     @foreach ($category->sub_categories as $sub_category)
 

@@ -98,7 +98,7 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#">OneTech</a></div>
+                                <div class="logo"><a href="/">E-Sasta</a></div>
                             </div>
                         </div>
 
@@ -141,7 +141,7 @@
                                             alt=""></div>
                                     <div class="wishlist_content">
                                         <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                        <div class="wishlist_count">115</div>
+                                        <div class="wishlist_count">{{ $wishlist_count ?? '' }}</div>
                                     </div>
                                 </div>
 

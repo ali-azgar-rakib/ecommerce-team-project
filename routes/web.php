@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Brands\BrandsController;
+use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\WishlistController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SingleProductController;
 use App\Models\Admin\SubCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -57,3 +59,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
 
 Route::post('/newslater', [FrontendController::class, 'newsletter'])->name('newslater');
 Route::get('/add/wishlist/{id}', [WishlistController::class, 'add_wishlist']);
+Route::get('/add/cart/{product}', [CartController::class, 'add_cart']);
+Route::post('/add/cart/{product}', [CartController::class, 'add_cart_from_post_req'])->name('add.cart');
+Route::get('/cart/content', [CartController::class, 'cart_content']);
+Route::get('/product/{product_id}/{product_name}', [SingleProductController::class, 'index'])->name('single.product.index');

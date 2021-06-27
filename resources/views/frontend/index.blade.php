@@ -195,7 +195,9 @@
 
                                             @endif
                                             <div class="product_name">
-                                                <div><a href="">{{ $trend->product_name }}</a></div>
+                                                <div><a
+                                                        href="{{ route('single.product.index',['product_id'=>$trend->id,'product_name'=>$trend->product_name]) }}">{{ $trend->product_name }}</a>
+                                                </div>
                                             </div>
                                             <div class="product_extras">
                                                 <div class="product_color">
@@ -204,7 +206,9 @@
                                                     <input type="radio" name="product_color" style="background:#000000">
                                                     <input type="radio" name="product_color" style="background:#999999">
                                                 </div>
-                                                <button class="product_cart_button">Add to Cart</button>
+                                                <button onclick="addToCart({{ $trend->id }})"
+                                                    class="product_cart_button">Add
+                                                    to Cart</button>
                                             </div>
                                         </div>
                                         <button onclick="wishList({{$trend->id}})">
@@ -257,7 +261,9 @@
 
                                             @endif
                                             <div class="product_name">
-                                                <div><a href="">{{ $on_sale->product_name }}</a></div>
+                                                <div><a
+                                                        href="{{ route('single.product.index',['product_id'=>$on_sale->id,'product_name'=>$on_sale->product_name]) }}">{{ $on_sale->product_name }}</a>
+                                                </div>
                                             </div>
                                             <div class="product_extras">
                                                 <div class="product_color">
@@ -266,7 +272,8 @@
                                                     <input type="radio" name="product_color" style="background:#000000">
                                                     <input type="radio" name="product_color" style="background:#999999">
                                                 </div>
-                                                <button class="product_cart_button">Add to Cart</button>
+                                                <button onclick="addToCart({{ $on_sale->id }})"
+                                                    class="product_cart_button">Add to Cart</button>
                                             </div>
                                         </div>
                                         <button onclick="wishList({{$on_sale->id}})">
@@ -317,7 +324,9 @@
 
                                             @endif
                                             <div class="product_name">
-                                                <div><a href="">{{ $best_rated->product_name }}</a></div>
+                                                <div><a
+                                                        href="{{ route('single.product.index',['product_id'=>$best_rated->id,'product_name'=>$best_rated->product_name]) }}">{{ $best_rated->product_name }}</a>
+                                                </div>
                                             </div>
                                             <div class="product_extras">
                                                 <div class="product_color">
@@ -326,7 +335,8 @@
                                                     <input type="radio" name="product_color" style="background:#000000">
                                                     <input type="radio" name="product_color" style="background:#999999">
                                                 </div>
-                                                <button class="product_cart_button">Add to Cart</button>
+                                                <button onclick="addToCart({{ $best_rated->id }})"
+                                                    class="product_cart_button">Add to Cart</button>
                                             </div>
                                         </div>
                                         <button onclick="wishList({{$best_rated->id}})">
@@ -3053,7 +3063,7 @@
 
                 <div class="advert d-flex flex-row align-items-center justify-content-start">
                     <div class="advert_content">
-                        <div class="advert_title"><a href="#">Trends 2018</a></div>
+                        <div class="advert_title"><a href="#">Buy One Get One</a></div>
                         <div class="advert_text">Lorem ipsum dolor sit amet, consectetur adipiscing Donec
                             et.
                         </div>
@@ -3114,7 +3124,7 @@
             <!-- Trends Content -->
             <div class="col-lg-3">
                 <div class="trends_container">
-                    <h2 class="trends_title">Trends 2018</h2>
+                    <h2 class="trends_title">Buy One Get One</h2>
                     <div class="trends_text">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p>
                     </div>
@@ -3133,127 +3143,35 @@
 
                     <div class="owl-carousel owl-theme trends_slider">
 
+                        @foreach ($bogos as $bogo)
+
+
                         <!-- Trends Slider Item -->
                         <div class="owl-item">
                             <div class="trends_item is_new">
                                 <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_1.jpg" alt=""></div>
+                                    <img src="{{ asset('img/media/products/'.$bogo->image_one) }}" alt=""></div>
                                 <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Jump White</a></div>
-                                        <div class="trends_price">$379</div>
+                                    <div class="trends_category"><a href="#">{{ $bogo->category->category_name }}</a>
                                     </div>
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
-
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item">
-                                <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_2.jpg" alt=""></div>
-                                <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
                                     <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Samsung Charm...</a>
+                                        <div class="trends_name"><a href="product.html">{{ $bogo->product_name }}</a>
                                         </div>
-                                        <div class="trends_price">$379</div>
-                                    </div>
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
-
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item is_new">
-                                <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_3.jpg" alt=""></div>
-                                <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">DJI Phantom 3...</a>
+                                        <div class="trends_price">${{ $bogo->discount_price ?? $bogo->selling_price }}
                                         </div>
-                                        <div class="trends_price">$379</div>
                                     </div>
                                 </div>
                                 <ul class="trends_marks">
                                     <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
+                                    <li class="trends_mark trends_new">BOGO</li>
                                 </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
+                                <div class="trends_fav" onclick="wishList({{ $bogo->id }})"><i class="fas fa-heart"></i>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item is_new">
-                                <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_1.jpg" alt=""></div>
-                                <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Jump White</a></div>
-                                        <div class="trends_price">$379</div>
-                                    </div>
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
+                        @endforeach
 
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item">
-                                <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_2.jpg" alt=""></div>
-                                <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Jump White</a></div>
-                                        <div class="trends_price">$379</div>
-                                    </div>
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
-
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item is_new">
-                                <div class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{ asset('frontend') }}/images/trends_3.jpg" alt=""></div>
-                                <div class="trends_content">
-                                    <div class="trends_category"><a href="#">Smartphones</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Jump White</a></div>
-                                        <div class="trends_price">$379</div>
-                                    </div>
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -3638,32 +3556,60 @@
 
 <script>
     function wishList(id){
-     // your code go here
-     alert()
-     const Toast = Swal.mixin({
+    // your code go here
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+
+    const request = $.ajax({
+    url: "{{ url('/add/wishlist') }}/"+id,
+    type: "GET",
+    dataType: "json",
+    success:function(data){
+    Toast.fire({
+    icon: `${data.status}`,
+    title: `${data.message}`
+    });
+    }
+    });
+    }
+
+    function addToCart(id){
+        // your code go here
+        const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
         })
 
         const request = $.ajax({
-            url: "{{ url('/add/wishlist') }}/"+id,
-            type: "GET",
-            dataType: "json",
-            success:function(data){
+        url: "{{ url('/add/cart') }}/"+id,
+        type: "GET",
+        dataType: "json",
+        success:function(data){
             Toast.fire({
             icon: `${data.status}`,
             title: `${data.message}`
             });
-            }
-            });
-  }
+        }
+        });
+    }
+
+
 </script>
 
 

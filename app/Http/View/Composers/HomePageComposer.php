@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use App\Models\Admin\Category;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryComposer
+class HomePageComposer
 {
 
     /**
@@ -17,7 +17,11 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $categories = Category::with('sub_categories')->get();
-        $view->with('categories', $categories);
+        if (Auth::check()) {
+            $wishlist_count = Auth::user()->wishlists()->count();
+        } else {
+            $wishlist_count = 0;
+        }
+        $view->with('wishlist_count', $wishlist_count);
     }
 }

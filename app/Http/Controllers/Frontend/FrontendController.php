@@ -21,7 +21,8 @@ class FrontendController extends Controller
         $best_rateds = Product::where('status', 1)->where('best_rated', 1)->inRandomOrder()->get();
         $hot_deals = Product::where('status', 1)->where('hot_deal', 1)->with('brand')->inRandomOrder()->get();
         $mid_sliders = Product::where('status', 1)->where('mid_slider', 1)->with(['brand', 'category'])->inRandomOrder()->limit(3)->get();
-        return view('frontend.index', compact('categories', 'main_slider', 'trends', 'onsales', 'best_rateds', 'hot_deals', 'mid_sliders'));
+        $bogos = Product::where('status', 1)->where('bogo', 1)->with(['brand', 'category'])->inRandomOrder()->get();
+        return view('frontend.index', compact('categories', 'main_slider', 'trends', 'onsales', 'best_rateds', 'hot_deals', 'mid_sliders', 'bogos'));
     }
 
     public function newsletter(Request $request)

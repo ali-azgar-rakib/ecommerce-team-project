@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\CategoryComposer;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Http\View\Composers\CategoryComposer;
+use App\Http\View\Composers\HomePageComposer;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        view()->composer('frontend.MainNav', CategoryComposer::class);
     }
 }
